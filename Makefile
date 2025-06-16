@@ -12,6 +12,7 @@ build: init
 
 lint:
 	poetry run black --check .
+	poetry run ruff check .
 
 check: lint
 	@echo "✅ Проверки пройдены"
