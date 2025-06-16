@@ -7,6 +7,9 @@ init:
 init-dev: init
 	poetry install --with dev
 
+build: init
+	poetry build
+
 lint:
 	poetry run black --check .
 
