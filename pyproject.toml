@@ -4,7 +4,7 @@ version = "0.1.1"
 description = ""
 authors = [{ name = "alsigna", email = "ignatov.alx@gmail.com" }]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<4.0"
 dependencies = ["requests (>=2.32.4,<3.0.0)"]
 
 [tool.poetry]
@@ -14,16 +14,28 @@ packages = [{ include = "python2025_alexigna", from = "src" }]
 [tool.poetry.group.dev.dependencies]
 black = "^25.1.0"
 ruff = "^0.11.13"
+mypy = "^1.16.1"
+flake8 = "^7.3.0"
+flake8-pyproject = "^1.2.3"
+wemake-python-styleguide = "^1.1.0"
 
+
+# 
+# black
+# 
 [tool.black]
 line-length = 120
 
 
+# 
+# ruff
+# 
 [tool.ruff]
 # https://docs.astral.sh/ruff/settings
 extend-exclude = ["__init__.py"]
 line-length = 120
 lint.pydocstyle.convention = "google"
+# https://docs.astral.sh/ruff/rules/
 lint.select = [
     "N",    # pep8-naming
     "B",    # flake8-bugbear
@@ -40,6 +52,37 @@ lint.select = [
     "DTZ",  # flake8-datetimez
     "ERA",  # flake8-eradicate
     "SLOT", # flake8-slots
+    # 
+    # "YTT",  # flake8-2020 (YTT)
+    # "ANN",  # flake8-annotations (ANN)
+    # "S",    # flake8-bandit (S)
+    # "BLE",  # flake8-blind-except (BLE)
+    # "FBT",  # flake8-boolean-trap (FBT)
+    # "T10",  # flake8-debugger (T10)
+    # "EM",   # flake8-errmsg (EM)
+    # "ISC",  # flake8-implicit-str-concat (ISC)
+    # "ICN",  # flake8-import-conventions (ICN)
+    # "LOG",  # flake8-logging (LOG)
+    # "G",    # flake8-logging-format (G)
+    # "INP",  # flake8-no-pep420 (INP)
+    # "PIE",  # flake8-pie (PIE)
+    # "PYI",  # flake8-pyi (PYI)
+    # "Q",    # flake8-quotes (Q)
+    # "RSE",  # flake8-raise (RSE)
+    # "RET",  # flake8-return (RET)
+    # "SLF",  # flake8-self (SLF)
+    # "SIM",  # flake8-simplify (SIM)
+    # "TC",   # flake8-type-checking (TC)
+    # "ARG",  # flake8-unused-arguments (ARG)
+    # "PTH",  # flake8-use-pathlib (PTH)
+    # "PLC",  # Pylint Convention (PLC)
+    # "PLE",  # Pylint Error (PLE)
+    # "PLR",  # Pylint Refactor (PLR)
+    # "PLW",  # Pylint Warning (PLW)
+    # "RUF",  # Ruff-specific rules (RUF)
+    # "TRY",  # tryceratops (TRY)
+    # "PGH",  # pygrep-hooks (PGH)
+    # "T20",  # flake8-print (T20)
 ]
 lint.ignore = [
     "D100",   # Missing docstring in public module
@@ -53,6 +96,48 @@ lint.ignore = [
     "S311",   # Standard pseudo-random generators are not suitable for cryptographic purposes
     "ERA001", # Remove commented-out code
 ]
+fix = true
+
+
+#
+# flake8 (WPS)
+[tool.flake8]
+select = "WPS"
+per-file-ignores = [
+    "03.output_collect.py:WPS221,WPS407", # пример отключения на уровне файла
+]
+exclude = [
+    "venv",        # пытался venv проверить...
+    ".venv",
+    ".git",
+    "__pycache__",
+]
+ignore = [
+    "WPS421", # Found wrong function call: {}
+    "WPS102", # Found incorrect module name pattern
+    "WPS110", # Found wrong variable name: {}, можно добавить через allowed-domain-names
+    "WPS226", # Found string literal over-use: {} > 3, можно настроить через max-string-usages
+    # "WPS1",   # или всю группу WPS1xx целиком
+]
+max-jones-score = 12 # WPS200
+max-line-complexity = 14 # WPS221
+max-cognitive-score = 12 # WPS231
+allowed-domain-names = [ # WPS110 - настройки, если нужны,
+    "value",
+    "data",
+    "item",
+]
+
+
+# 
+# mypy
+# 
+[tool.mypy]
+plugins = [
+    # "pydantic.mypy", # интеграция с pydantic
+]
+strict = true
+
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

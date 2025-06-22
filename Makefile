@@ -11,8 +11,12 @@ build: init
 	poetry build
 
 lint:
-	poetry run black --check .
-	poetry run ruff check .
+	poetry run black --check src
+	poetry run ruff check src
+	poetry run flake8 src
 
-check: lint
+typing:
+	poetry run mypy src
+
+check: lint typing
 	@echo "✅ Проверки пройдены"
