@@ -1,11 +1,12 @@
 from collections.abc import Callable, Mapping
 from functools import lru_cache
 from types import MappingProxyType
+from typing import TypeAlias
 from urllib.parse import urlencode
 
 # from typing import TypeAlias
-# QueryParam: TypeAlias = tuple[str, str | int]
-type QueryParam = tuple[str, str | int]
+QueryParam: TypeAlias = tuple[str, str | int]
+# type QueryParam = tuple[str, str | int]
 
 NETBOX_URL = "https://demo.netbox.dev"
 
