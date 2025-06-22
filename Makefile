@@ -15,8 +15,8 @@ lint:
 	poetry run ruff check src
 	poetry run flake8 src
 
-typing:
+mypy:
 	poetry run mypy src
 
-check: lint typing
+check: lint mypy
 	@echo "✅ Проверки пройдены"
