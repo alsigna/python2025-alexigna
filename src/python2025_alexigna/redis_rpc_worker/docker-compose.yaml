@@ -1,0 +1,15 @@
+# запустить
+# docker compose up
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  worker:
+    image: worker:latest
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis

@@ -1,0 +1,16 @@
+FROM python:3.13-slim
+
+COPY ./requirements.txt ./requirements.txt
+
+
+RUN apt update && \
+apt install -y ssh && \
+apt clean
+
+RUN pip install --upgrade pip
+RUN pip install -r ./requirements.txt  
+
+WORKDIR /app
+COPY ./app /app
+
+CMD ["supervisord", "-c", "./supervisord.conf", "-n"]
