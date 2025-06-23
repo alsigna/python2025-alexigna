@@ -133,10 +133,11 @@ allowed-domain-names = [ # WPS110 - настройки, если нужны,
 # mypy
 # 
 [tool.mypy]
-plugins = [
-    # "pydantic.mypy", # интеграция с pydantic
-]
 strict = true
+plugins = [
+    # "pydantic.mypy",                  # интеграция с pydantic
+    "mypy_plugins/incomplete_checker_plugin.py",
+]
 
 
 [build-system]
