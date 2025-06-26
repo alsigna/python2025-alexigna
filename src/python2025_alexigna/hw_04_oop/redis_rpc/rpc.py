@@ -1,14 +1,12 @@
 import time
-from typing import Any, Callable, Literal, Protocol, TypeAlias, overload
+from typing import Any, Callable, Literal
 
 from redis import Redis
 from rq import Queue
 from rq.exceptions import InvalidJobOperation
 from rq.job import Job, NoSuchJobError
-from scrapli import Scrapli
-from scrapli.response import Response
 
-from python2025_alexigna.redis_rpc.models import TaskStatus
+from python2025_alexigna.hw_03_oop.redis_rpc.models import TaskStatus
 
 
 class RpcReply:
