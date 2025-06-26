@@ -151,10 +151,4 @@ def craft_nb_query(request_params: Mapping[str, list[str]]) -> list[QueryParam]:
 if __name__ == "__main__":
     result = craft_nb_query(EXAMPLE_INPUT)
     assert tuple(result) == EXAMPLE_RESULT, "функция 'craft_nb_query' работает некорректно"
-    print(
-        "{}{}{}".format(
-            NETBOX_URL,
-            "/api/dcim/devices/?",
-            urlencode(result),
-        ),
-    )
+    print(f"{NETBOX_URL}/api/dcim/devices/?{urlencode(result)}")

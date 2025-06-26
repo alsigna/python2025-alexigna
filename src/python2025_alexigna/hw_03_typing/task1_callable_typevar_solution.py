@@ -5,7 +5,10 @@ SeqItemT = TypeVar("SeqItemT")
 FuncResultT = TypeVar("FuncResultT")
 
 
-def process(func: Callable[[SeqItemT], FuncResultT], seq: Sequence[SeqItemT]) -> list[FuncResultT]:
+def process(
+    func: Callable[[SeqItemT], FuncResultT],
+    seq: Sequence[SeqItemT],
+) -> list[FuncResultT]:
     return [func(item) for item in seq]
 
 

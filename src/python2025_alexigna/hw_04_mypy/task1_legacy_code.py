@@ -1,3 +1,5 @@
+# нужно сделать pyi файл (вручную или автоматически), довести его до рабочего состояния
+
 from functools import partial
 
 
@@ -58,7 +60,7 @@ class NetboxObjectResolver:
         return ("status", status.lower())
 
 
-def processor(processor, items):
+def process_items(processor, items):
     """Применяет процессор к каждому элементу последовательности."""
     return [processor(item) for item in items]
 
@@ -100,11 +102,11 @@ def craft_nb_query(request_params):
         raise ValueError("отсутствуют параметры запроса")
 
     item_type_map = {
-        "name": partial(processor, NetboxObjectResolver.get_name_ie),
-        "site": partial(processor, NetboxObjectResolver.get_site_id),
-        "role": partial(processor, NetboxObjectResolver.get_role_id),
-        "manufacturer": partial(processor, NetboxObjectResolver.get_manufacturer_id),
-        "status": partial(processor, NetboxObjectResolver.get_status),
+        "name": partial(process_items, NetboxObjectResolver.get_name_ie),
+        "site": partial(process_items, NetboxObjectResolver.get_site_id),
+        "role": partial(process_items, NetboxObjectResolver.get_role_id),
+        "manufacturer": partial(process_items, NetboxObjectResolver.get_manufacturer_id),
+        "status": partial(process_items, NetboxObjectResolver.get_status),
     }
     q = []
     for item_type, items in request_params.items():
@@ -113,7 +115,6 @@ def craft_nb_query(request_params):
             raise ValueError("неизвестный тип параметра")
         q.extend(expose_func(items))
 
-    print(NetboxObjectResolver.get_name_ie("admin"))
     q.append(("brief", "true"))
     q.append(("limit", 500))
     return q

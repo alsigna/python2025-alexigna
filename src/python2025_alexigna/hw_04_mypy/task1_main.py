@@ -1,9 +1,17 @@
+# - нужно сделать pyi файл (вручную или автоматически) для task1_legacy_code
+# - довести его до рабочего состояния
+# - импортировать craft_nb_query в task1_main.py из task1_legacy_code.py
+# - запустить task1_main.py и убедиться, что код работает как и раньше (нет exception)
+# - проверить папку с файлами mypy --strict и убедиться, что нет ошибок
+
+
 from types import MappingProxyType
+from typing import Final
 from urllib.parse import urlencode
 
-from python2025_alexigna.hw_03_mypy.legacy_code import NetboxObjectResolver, craft_nb_query
+from python2025_alexigna.hw_04_mypy.task1_legacy_code import craft_nb_query
 
-NETBOX_URL = "https://demo.netbox.dev"
+NETBOX_URL: Final[str] = "https://demo.netbox.dev"
 
 
 EXAMPLE_INPUT = MappingProxyType(
