@@ -11,25 +11,35 @@ class Device:
         self.bgp.add_peering(peer)
 
     def __str__(self) -> str:
-        return f"{self.__class__.__name__}({self.ip}, {self.asn})"
+        return f"Device({self.ip}, {self.asn})"
 
     def __repr__(self) -> str:
         return str(self)
 
+    def __del__(self) -> None:
+        print(f"<< удаление объекта {self} >>")
+
 
 class BGP:
     def __init__(self, device: Device) -> None:
+        self._ip = device.ip
         self.device = device
-        self.peers: list[Device] = []
+        self.peers: set[Device] = set()
 
     def add_peering(self, peer: Device) -> None:
-        if peer not in self.peers:
-            self.peers.append(peer)
-        if self.device not in peer.bgp.peers:
-            peer.bgp.peers.append(self.device)
+        if peer is self.device:
+            return
+        self.peers.add(peer)
+        peer.bgp.peers.add(self.device)  # noqa: SLF001
+
+    def __str__(self) -> str:
+        return f"BGP объект для Device({self._ip})"
+
+    def __del__(self) -> None:
+        print(f"<< удаление объекта {self} >>")
 
 
-if __name__ == "__main__":
+def demo() -> None:
     pe1 = Device("192.168.0.1", "64512")
     pe2 = Device("192.168.0.2", "64512")
     pe3 = Device("192.168.0.3", "64512")
@@ -38,8 +48,12 @@ if __name__ == "__main__":
     pe1.add_peer(pe3)
     pe2.add_peer(rr1)
     pe3.add_peer(rr1)
-
     print(pe1.bgp.peers)
     print(pe2.bgp.peers)
     print(pe3.bgp.peers)
     print(rr1.bgp.peers)
+
+
+if __name__ == "__main__":
+    demo()
+    print("= работа кода закончена =")
