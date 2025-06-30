@@ -106,7 +106,7 @@ lint.ignore = [
     "S311",   # Standard pseudo-random generators are not suitable for cryptographic purposes
     "ERA001", # Remove commented-out code
 ]
-fix = true
+# fix = true
 
 
 #
