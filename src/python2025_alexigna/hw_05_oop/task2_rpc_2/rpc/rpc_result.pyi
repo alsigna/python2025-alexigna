@@ -3,9 +3,6 @@ from typing import Any
 from rq.job import Job as Job
 from scrapli.response import MultiResponse, Response
 
-from python2025_alexigna.hw_05_oop.task1_rpc_2.rpc.exceptions import RPCFailedJobError as RPCFailedJobError
-from python2025_alexigna.hw_05_oop.task1_rpc_2.rpc.exceptions import RPCJobStatusError as RPCJobStatusError
-
 class RPCResult:
     def __init__(self, job: Job) -> None: ...
     def wait_for_result(self) -> None: ...

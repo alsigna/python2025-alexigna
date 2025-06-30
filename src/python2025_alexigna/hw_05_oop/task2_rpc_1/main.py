@@ -7,7 +7,7 @@ import time
 from redis import Redis
 from rq import Queue
 
-from python2025_alexigna.hw_05_oop.task1_rpc_1.utils import hello
+from python2025_alexigna.hw_05_oop.task2_rpc_1.utils import hello
 
 redis = Redis()
 queue = Queue(connection=redis)

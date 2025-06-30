@@ -1,4 +1,4 @@
-from python2025_alexigna.hw_05_oop.task1_rpc_2.rpc import RPC, RPCResult
+from python2025_alexigna.hw_05_oop.task2_rpc_2.rpc import RPC, RPCResult
 
 with RPC(app_name="scrapli") as rpc:
     # tasks: list[RPCResult] = [rpc.send_command.no_wait(f"admin-{i:03}") for i in range(1, 101)]

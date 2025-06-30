@@ -1,8 +1,8 @@
 from types import TracebackType
 from typing import Literal, Self, Sequence
 
-from python2025_alexigna.hw_05_oop.task1_rpc_2.rpc.rpc_method import RPCMethod
-from python2025_alexigna.hw_05_oop.task1_rpc_2.rpc.rpc_result import (
+from python2025_alexigna.hw_05_oop.task2_rpc_2.rpc.rpc_method import RPCMethod
+from python2025_alexigna.hw_05_oop.task2_rpc_2.rpc.rpc_result import (
     RPCResult,
     ScrapliSendCommandRPCResult,
     ScrapliSendCommandsRPCResult,

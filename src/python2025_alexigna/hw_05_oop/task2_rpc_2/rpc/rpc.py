@@ -5,8 +5,8 @@ from typing import Literal, Self, Sequence
 from redis import Redis
 from rq import Queue
 
-from python2025_alexigna.hw_05_oop.task1_rpc_2.rpc.rpc_method import RPCMethod
-from python2025_alexigna.hw_05_oop.task1_rpc_2.rpc.rpc_result import RPCResult
+from python2025_alexigna.hw_05_oop.task2_rpc_2.rpc.rpc_method import RPCMethod
+from python2025_alexigna.hw_05_oop.task2_rpc_2.rpc.rpc_result import RPCResult
 
 
 class RPC:
