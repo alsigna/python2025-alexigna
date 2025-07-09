@@ -3,36 +3,23 @@ from typing import Generic, TypeVar
 
 from rq.job import Job, JobStatus
 
-from .exceptions import RPCFailedJobError
+from .exceptions import RPCFailedJobError, RPCUnknownJobStatusError
 
 T = TypeVar("T")
 
 
 class RPCResult(Generic[T]):
     def __init__(self, job: Job):
-        self._job: Job = job
-        self._job_id: str = job.id
+        self.job_id = job.id
+        self._job = job
         self._is_failed = False
         self._is_finished = False
         self._exc_info: str | None = None
         self._result: T | None = None
 
-        description = self._job.description
-        if description is None:
-            self._description = "unknown task description"
-        else:
-            self._description = description.split(".", 2)[2]
-
-    def __repr__(self) -> str:
-        return f"[{self._job.id}] {self._description}"
-
     @property
     def result(self) -> T | None:
         return self._result
-
-    @property
-    def job_id(self) -> str:
-        return self._job_id
 
     @property
     def is_failed(self) -> bool:
@@ -66,19 +53,14 @@ class RPCResult(Generic[T]):
                 self._is_failed = True
                 self._exc_info = self._job.exc_info
             case _:
-                raise ValueError(f"неизвестный статус {self._job_id}: {status}")
-
-    def raise_for_status(self) -> None:
-        # fmt:off
-        if (
-            not self._is_finished  # задача еще не завершена
-            or not self._is_failed  # или завершена, но без ошибок
-        ):
-            return
-        # fmt:on
-        raise RPCFailedJobError(self._exc_info) from None
+                raise RPCUnknownJobStatusError(f"неизвестный статус {self._job.id}: {status}")
 
     def wait_for_result(self) -> None:
         while not self._is_finished:
             time.sleep(0.5)
             self._update_status()
+
+    def raise_for_status(self) -> None:
+        if not self._is_finished or not self._is_failed:
+            return
+        raise RPCFailedJobError(self._exc_info)

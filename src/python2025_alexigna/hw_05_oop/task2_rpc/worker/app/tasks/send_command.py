@@ -1,11 +1,11 @@
-from typing import Any
+import os
 
 from scrapli import Scrapli
 from scrapli.response import Response
 
 _scrapli_template = {
-    "auth_username": "admin",
-    "auth_password": "P@ssw0rd",
+    "auth_username": os.getenv("SSH_USERNAME"),
+    "auth_password": os.getenv("SSH_PASSWORD"),
     "auth_strict_key": False,
     "transport_options": {
         "open_cmd": [
@@ -18,14 +18,8 @@ _scrapli_template = {
 }
 
 
-def send_command(
-    platform: str,
-    host: str,
-    command: str,
-    *args: Any,
-    **kwargs: Any,
-) -> Response:
+def send_command(platform: str, host: str, command: str) -> Response:
     scrapli = _scrapli_template | {"host": host, "platform": platform}
     with Scrapli(**scrapli) as cli:  # type: ignore [arg-type]
-        response = cli.send_command(command, *args, **kwargs)
-    return response
+        result = cli.send_command(command)
+    return result

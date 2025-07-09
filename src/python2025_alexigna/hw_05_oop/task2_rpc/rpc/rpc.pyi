@@ -5,7 +5,6 @@ from scrapli.response import MultiResponse, Response
 
 from .rpc_method import RPCMethod as RPCMethod
 from .rpc_result import RPCResult as RPCResult
-from .utils import Platform
 
 class RPC:
     def __init__(
@@ -14,7 +13,6 @@ class RPC:
         redis_port: int = 6379,
         redis_db: int = 0,
         redis_password: str | None = None,
-        queue_name: Literal["be", "pq"] = "be",
     ) -> None: ...
     def __enter__(self) -> Self: ...
     def __exit__(
@@ -39,17 +37,16 @@ class RPC:
         *args: Any,
         **kwargs: Any,
     ) -> RPCResult[Response]:
-        """Выполнение scrapli.send_command."""
+        """Выполняет scrapli.send_command() на удаленном сервере."""
         ...
 
     def send_commands(
         self,
-        platform: Platform,
+        platform: str,
         host: str,
         commands: list[str],
         *args: Any,
         **kwargs: Any,
     ) -> RPCResult[MultiResponse]:
-        """Выполнение scrapli.send_commands."""
-        ...
+        """Выполняет scrapli.send_commands() на удаленном сервере."""
         ...
