@@ -3,7 +3,7 @@ from typing import Generic, TypeVar
 
 from rq.job import Job, JobStatus
 
-from .exceptions import RPCFailedJobError, RPCUnknownJobStatusError
+from .exceptions import RPCFailedJobError, RPCTimeoutError, RPCUnknownJobStatusError
 
 T = TypeVar("T")
 
@@ -55,10 +55,13 @@ class RPCResult(Generic[T]):
             case _:
                 raise RPCUnknownJobStatusError(f"неизвестный статус {self._job.id}: {status}")
 
-    def wait_for_result(self) -> None:
+    def wait_for_result(self, timeout: float = 120.0) -> None:
+        t0 = time.monotonic()
         while not self._is_finished:
-            time.sleep(0.5)
             self._update_status()
+            if time.monotonic() - t0 >= timeout:
+                raise RPCTimeoutError("Время ожидания превышено")
+            time.sleep(0.5)
 
     def raise_for_status(self) -> None:
         if not self._is_finished or not self._is_failed:
