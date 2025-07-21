@@ -1,16 +1,3 @@
-# + сделать docker-compose
-# + разделить на файлы
-# + сделать raise_for_status
-# + добавить exceptions
-# + написать gather. as_completed на дз
-# + свести в ноль black/ruff/mypy
-# + написать pyi файл, добавить py.typed
-# + добавить описание функций
-# + перевести RPCResult на generic
-# домашка:
-#  - написать функцию-генератор as_completed
-#  - добавить ограничение по времени в бесконечные циклы (wait_for_result, gather, ...)
-
 import time
 from collections.abc import Iterator
 from types import TracebackType
