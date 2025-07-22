@@ -16,6 +16,7 @@ dependencies = [
     "nornir-utils (>=0.2.0,<0.3.0)",
     "nornir-scrapli (>=2025.1.30,<2026.0.0)",
     "supervisor (>=4.2.5,<5.0.0)",
+    "pydantic-config (>=0.3.0,<0.4.0)",
 ]
 
 [tool.poetry]
