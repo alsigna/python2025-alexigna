@@ -25,9 +25,9 @@ class Parameter(Generic[T]):
     def __set_name__(self, owner: type, name: str) -> None:
         self.name = name
 
-    def __get__(self, instance: object | None, owner: type) -> T | "Parameter[T]":
+    def __get__(self, instance: object | None, owner: type) -> T:
         if instance is None:
-            return self
+            return self  # type: ignore[return-value]
 
         if self.name in instance.__dict__:
             value = instance.__dict__[self.name]

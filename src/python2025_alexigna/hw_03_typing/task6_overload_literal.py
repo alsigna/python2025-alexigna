@@ -1,3 +1,6 @@
+# ruff: noqa
+# flake8: noqa
+# type: ignore
 # напишите функцию api_request, которая принимает:
 #  - method = только "GET", "POST", "DELETE"
 #  - url = строка

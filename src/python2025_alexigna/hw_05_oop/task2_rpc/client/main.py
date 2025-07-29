@@ -3,7 +3,8 @@ from scrapli.response import Response
 
 from python2025_alexigna.hw_05_oop.task2_rpc.client.device_protocol import CiscoIOSXE, Device, HuaweiVRP
 from python2025_alexigna.hw_05_oop.task2_rpc.rpc import RPC, RPCResult
-from python2025_alexigna.hw_05_oop.task2_rpc.rpc.exceptions import RPCError
+
+# from python2025_alexigna.hw_05_oop.task2_rpc.rpc.exceptions import RPCError
 
 
 def main_gather() -> None:
@@ -65,4 +66,6 @@ def main_as_completed() -> None:
 
 if __name__ == "__main__":
     # main_gather()
+    main_as_completed()
+    main_as_completed()
     main_as_completed()

@@ -15,5 +15,5 @@ def send_email(email: Email) -> None:
 
 if __name__ == "__main__":
     send_email(validate_email("user@example.com"))
-    send_email("user@example.com")
-    send_email("user-example.com")
+    send_email("user@example.com")  # type: ignore
+    send_email("user-example.com")  # type: ignore

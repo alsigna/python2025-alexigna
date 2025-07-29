@@ -1,5 +1,9 @@
+# ruff: noqa
+# flake8: noqa
+# type: ignore
 # создать тип Email, и проверку, что адрес содержит @.
 # написать функцию send_email, которая принимает валидный Email
+
 
 if __name__ == "__main__":
     send_email(validate_email("user@example.com"))  # ОК

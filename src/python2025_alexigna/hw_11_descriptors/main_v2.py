@@ -1,9 +1,9 @@
-from typing import Any, Protocol
+from typing import Any
 
 from scrapli import Scrapli
 
-from python2025_alexigna.config import config
-from python2025_alexigna.utils import Parameter
+from python2025_alexigna.hw_11_descriptors.config import config
+from python2025_alexigna.hw_11_descriptors.utils import Parameter
 
 if config.developer_mode:
     import logging
@@ -14,7 +14,7 @@ if config.developer_mode:
     log.addHandler(sh)
 
 
-class Device(Protocol):
+class Device:
     class Config:
         cli_username: Parameter[str] = Parameter(env="MY_APP_CLI_USERNAME", type_=str)
         cli_password: Parameter[str] = Parameter(env="MY_APP_CLI_PASSWORD", type_=str)
@@ -27,12 +27,7 @@ class Device(Protocol):
     platform: str
     show_version_command: str
 
-    def __init__(
-        self,
-        ip: str,
-        port: int | None = None,
-        transport: str | None = None,
-    ):
+    def __init__(self, ip: str):
         self.ip = ip
         self.spec = self.Config()
 
@@ -100,4 +95,6 @@ if __name__ == "__main__":
         if device.ip == "192.168.122.102":
             device.spec.scrapli_cli_transport = "telnet"
             device.spec.scrapli_cli_port = 23
+        print(device.get_version_output())
+        print(device.get_version_output())
         print(device.get_version_output())

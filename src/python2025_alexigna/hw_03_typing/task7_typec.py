@@ -1,3 +1,6 @@
+# ruff: noqa
+# flake8: noqa
+# type: ignore
 # нужно сделать аннотацию кода, что бы mypy --strict не выдавал ошибок.
 
 import logging

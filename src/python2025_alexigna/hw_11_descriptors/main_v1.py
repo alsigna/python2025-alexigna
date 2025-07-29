@@ -1,8 +1,8 @@
-from typing import Any, Protocol
+from typing import Any
 
 from scrapli import Scrapli
 
-from python2025_alexigna.config import config
+from python2025_alexigna.hw_11_descriptors.config import config
 
 if config.developer_mode:
     import logging
@@ -13,7 +13,7 @@ if config.developer_mode:
     log.addHandler(sh)
 
 
-class Device(Protocol):
+class Device:
     platform: str
     show_version_command: str
 
@@ -89,4 +89,6 @@ if __name__ == "__main__":
         DeviceFactory.create("192.168.122.103", "huawei_vrp"),
     ):
         print("-" * 10)
+        print(device.get_version_output())
+        print(device.get_version_output())
         print(device.get_version_output())

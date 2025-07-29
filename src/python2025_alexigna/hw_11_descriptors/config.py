@@ -1,4 +1,4 @@
-from python2025_alexigna.utils import Parameter
+from python2025_alexigna.hw_11_descriptors.utils import Parameter
 
 
 class Config:

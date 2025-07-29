@@ -25,5 +25,5 @@ def api_request(
 if __name__ == "__main__":
     api_request("GET", "/user")
     api_request("POST", "/user", {"name": "admin"})
-    api_request("POST", "/user")
-    api_request("GET", "/user", {"name": "admin"})
+    api_request("POST", "/user")  # type: ignore
+    api_request("GET", "/user", {"name": "admin"})  # type: ignore

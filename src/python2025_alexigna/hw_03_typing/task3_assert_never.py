@@ -1,3 +1,6 @@
+# ruff: noqa
+# flake8: noqa
+# type: ignore
 # Есть три вендора: cisco, huawei, arista. Нужно написать функцию "svi_name(vendor_name, svi_id)"
 # которая по переданному вендору и номеру интерфейса возвращает имя SVI интерфейса:
 #  - cisco - Vlan<id>

@@ -148,7 +148,9 @@ allowed-domain-names = [ # WPS110 - настройки, если нужны,
 # mypy
 # 
 [tool.mypy]
+mypy_path = "src"
 strict = true
+explicit_package_bases = true
 plugins = [
     "pydantic.mypy",                             # интеграция с pydantic
     "mypy_plugins/incomplete_checker_plugin.py",

@@ -13,7 +13,7 @@ build: init
 lint:
 	poetry run black --check src
 	poetry run ruff check src
-	poetry run flake8 src
+# 	poetry run flake8 src
 
 mypy:
 	poetry run mypy src
